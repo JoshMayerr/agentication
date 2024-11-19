@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        width: 600px;
+        padding: 24px;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .domain-list {
+        max-height: 300px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 12px;
+      }
+
+      .domain-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        background: #f9f9f9;
+        margin: 6px 0;
+        border-radius: 8px;
+      }
+
+      .capture-controls {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .status {
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+
+      .status.active {
+        background: #e6ffe6;
+        color: #006600;
+      }
+
+      .status.inactive {
+        background: #ffe6e6;
+        color: #660000;
+      }
+
+      button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      button.primary {
+        background: #0066cc;
+        color: white;
+      }
+
+      button.secondary {
+        background: #f5f5f5;
+        color: #333;
+      }
+
+      input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        width: 100%;
+      }
+
+      .error {
+        color: #cc0000;
+        font-size: 16px;
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <input
+          type="text"
+          id="domainInput"
+          placeholder="Enter domain (e.g., example.com)"
+        />
+        <div id="domainError" class="error" style="display: none"></div>
+      </div>
+
+      <div class="domain-list" id="domainList">
+        <!-- Domains will be inserted here -->
+      </div>
+
+      <div class="capture-controls">
+        <div id="captureStatus" class="status inactive">Capture Inactive</div>
+        <button id="toggleCapture" class="primary">Start Capture</button>
+      </div>
+
+      <div>
+        <button id="exportData" class="secondary" disabled>Export Data</button>
+        <button id="clearData" class="secondary" disabled>Clear Data</button>
+      </div>
+
+      <button id="copyData" class="secondary">Copy to Clipboard</button>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
