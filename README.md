@@ -1,3 +1,5 @@
+![Banner Image](banner.png)
+
 # Agentication: Turning Session-Based APIs Into OAuth APIs Programmatically
 
 Agentication is a tool designed to seamlessly convert APIs into OAuth APIs using session-captures and a reverse proxy. This allows developers to leverage the security and convenience of OAuth without having to manually refactor their existing session-based API implementations.
