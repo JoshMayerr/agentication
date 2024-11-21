@@ -34,4 +34,4 @@ To install Agentication, clone the repository and install the necessary dependen
 
 There are three independent pieces to the entire flow (`chrome_extension`, `client`, `proxy`).
 
-They can be used on their own or combined to use the whole demo.
+They can be used on their own or combined to use the whole demo..
