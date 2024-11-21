@@ -2,6 +2,8 @@
 
 # Agentication: Turning Session-Based APIs Into OAuth APIs Programmatically
 
+OAuth is the only solution to delegated authorization for agents that works well today. However, there is an extremely short list of services today that support OAuth. Therefore, in order to increase the secure capabilities of agents, it is important to increase the number of OAuth APIs. That's what Agentication tries to do. From the developer's perspective, they can build client applications on top of LinkedIn/X/JetBlue, for example, as if the real backend APIs were OAuth.
+
 Agentication is a tool designed to seamlessly convert APIs into OAuth APIs using session-captures and a reverse proxy. This allows developers to leverage the security and convenience of OAuth without having to manually refactor their existing session-based API implementations.
 
 ## Features
