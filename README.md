@@ -14,6 +14,9 @@ Agentication is a tool designed to seamlessly convert APIs into OAuth APIs using
 - **Customizable:** Configure the conversion process to suit your specific needs.
 - **Generalizable:** This theoretically works on any session-based APIs
 
+![Diagram](diagram.png)
+A diagram depticting the different components of the system and how they relate.
+
 ## Improvements
 
 - [ ] Refresh session support
