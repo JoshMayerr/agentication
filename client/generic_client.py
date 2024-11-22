@@ -118,7 +118,8 @@ class GenericClient:
                 'url': url,
                 'method': method
             },
-            headers={'Authorization': f'Bearer {token}'},
+            headers={'Authorization': f'Bearer {token}',
+                     'Content-Type': 'application/json'},
             json=body
         )
 

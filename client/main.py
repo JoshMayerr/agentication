@@ -6,7 +6,7 @@ from langgraph.prebuilt import create_react_agent
 from langchain_openai import ChatOpenAI
 
 # josh's tools
-from toolbox import get_id_for_username, get_recent_tweets, post_to_linkedin
+from toolbox import get_id_for_username, get_recent_tweets, post_to_linkedin, get_piazza_online_users, search_piazza
 
 
 class State(TypedDict):
@@ -15,7 +15,8 @@ class State(TypedDict):
 
 graph_builder = StateGraph(State)
 
-tools = [get_id_for_username, get_recent_tweets, post_to_linkedin]
+tools = [get_id_for_username, get_recent_tweets,
+         post_to_linkedin, get_piazza_online_users, search_piazza]
 model = ChatOpenAI(model="gpt-4o")
 graph = create_react_agent(model, tools=tools)
 

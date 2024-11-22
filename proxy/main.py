@@ -1,3 +1,4 @@
+import json
 from fastapi import FastAPI, HTTPException, Header, Depends
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
@@ -167,11 +168,28 @@ async def proxy_request(
             follow_redirects=True
         )
 
+        print(response, "from proxy")
+
         if response.headers.get("content-type", "").startswith("application/json"):
             return response.json()
         return response.text
 
 
 if __name__ == "__main__":
+    input_file = Path("output.json")
+    output_dir = Path("captured_sessions")
+    output_dir.mkdir(exist_ok=True)
+
+    with open(input_file, "r") as f:
+        data = json.load(f)
+
+    for host, session in data.items():
+        output_file = output_dir / \
+            Path(f"{host.replace('.', '_')}.pkl")
+        with open(output_file, "wb") as f:
+            pickle.dump(session, f)
+
+    print(f"Saved {len(data)} sessions to {output_dir}")
+
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

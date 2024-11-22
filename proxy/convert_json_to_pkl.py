@@ -7,10 +7,16 @@
 import json
 import pickle
 from pathlib import Path
+import os
 
-input_file = Path("output.json")
-output_dir = Path("captured_sessions")
+
+input_file = Path("proxy/output.json")
+output_dir = Path("proxy/captured_sessions")
 output_dir.mkdir(exist_ok=True)
+
+print(f"Current working directory: {os.getcwd()}")
+print(f"Input file path: {input_file.resolve()}")
+print(f"Output directory path: {output_dir.resolve()}")
 
 with open(input_file, "r") as f:
     data = json.load(f)

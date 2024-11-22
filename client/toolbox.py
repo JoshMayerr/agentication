@@ -1,5 +1,5 @@
-import json
 import requests
+import json
 import urllib.parse
 
 from langchain_core.tools import tool
@@ -102,7 +102,6 @@ def get_recent_tweets(restId: str):
     response = client.make_request(
         get_tweets_url, method="GET", token=token)
 
-    print(response)
     return extract_tweet_info(response)["tweets"]
 
 
@@ -123,7 +122,7 @@ def post_to_linkedin(content: str):
                     "visibilityType": "ANYONE"
                 },
                 "commentary": {
-                    "text": content,
+                    "text": "test2",
                     "attributesV2": []
                 }
             }
@@ -132,10 +131,92 @@ def post_to_linkedin(content: str):
         "includeWebMetadata": True
     }
 
-    token = client.get_token(host='www.linkedin.com', scopes=[
+    token = client.get_token(host='linkedin.com', scopes=[
                              'profile', 'connections'])
 
     response = client.make_request(
         url, method="POST", token=token, body=payload)
 
+    print(response, "Da[owjdwpajd]")
+
     return {"message": "Post successful"}
+
+
+# @tool
+def search_linkedin(query: str):
+    """
+    Search LinkedIn for a given query.
+    """
+
+    url = f"https://www.linkedin.com/voyager/api/graphql?variables=(query:aliza%20mayer)&queryId=voyagerSearchDashTypeahead.5d388aa0c61a43e1dcd14aaa52fe062c"
+
+    token = client.get_token(host='linkedin.com', scopes=[
+        'profile', 'connections'])
+
+    response = client.make_request(
+        url, method="GET", token=token)
+
+    return response
+
+
+@tool
+def get_piazza_online_users():
+    """
+    Get the number of online users for a given Piazza course.
+    """
+
+    url = "https://piazza.com/logic/api?method=network.get_online_users"
+    payload = {
+        "method": "network.get_online_users",
+        "params": {
+            "nid": "m0eacmiihmh4oa"
+        }
+    }
+
+    token = client.get_token(host='piazza.com', scopes=[
+                             'settings'])
+
+    response = client.make_request(
+        url, method="POST", token=token, body=payload)
+
+    return response
+
+
+@tool
+def search_piazza(query: str):
+    """
+    Search Piazza for a given query.
+    """
+
+    url = "https://piazza.com/logic/api?method=network.search"
+
+    payload = {
+        "method": "network.search",
+        "params": {
+            "nid": "m0eacmiihmh4oa",
+            "query": query
+        }
+    }
+
+    token = client.get_token(host='piazza.com', scopes=[
+                             'profile', 'posts'])
+
+    response = client.make_request(
+        url, method="POST", token=token, body=payload)
+
+    extracted_data = [
+        {
+            "subject": item["subject"],
+            # Use get() to handle missing keys
+            "content_snipet": item.get("content_snipet", ""),
+            "id": item["id"]
+        }
+        # Safely handle missing 'result' key
+        for item in response.get("result", [])
+    ]
+
+    return extracted_data[5]
+
+
+if __name__ == "__main__":
+    print(search_linkedin("aliza"))
